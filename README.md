@@ -121,16 +121,12 @@ ip route del default via 192.168.50.1 dev eth0
 
 После настройки маршрутов и запуска контейнеров была проведена проверка. Результаты выводятся в командной строке маршрутизаторов и ПК.
 
-Команда `ip route show` на маршрутизаторе `R01` показала корректную таблицу маршрутизации:
-<img width="1698" height="1046" alt="2025-10-06_17-05-39" src="https://github.com/user-attachments/assets/4a24bd57-9ee8-411f-855a-98a00942c307" />
-
-Аналогичным образом на маршрутизаторе `R02` была показана таблица маршрутизации: 
-
-<img width="1158" height="411" alt="2025-10-06_17-15-11" src="https://github.com/user-attachments/assets/c5f2c7df-b9ec-4b4f-b8c8-d485124eb6df" />
+Команда `ip route show` на маршрутизаторе `R01` и `R02` показала корректную таблицу маршрутизации:
+![Image alt](https://github.com/Golovastik777/devops_practice2/raw/main/lab2_iproute.png)
 
 Проверка командой ping с `PC1` до `PC2` и `PC3` показала успешное прохождение пакетов:
 
-<img width="1474" height="1316" alt="2025-10-06_17-17-43" src="https://github.com/user-attachments/assets/c245631e-08b3-4a85-9b78-67a677d410a3" />
+![Image alt](https://github.com/Golovastik777/devops_practice2/raw/main/lab2_ping.png)
 
 
 ## Заключение
