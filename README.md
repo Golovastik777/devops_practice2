@@ -21,57 +21,43 @@
 name: rogakopita-games
 
 topology:
-  kinds:
-    linux:
-      image: alpine:latest
-      
-  nodes:
-    R01_Moscow:
-      kind: linux
-      mgmt-ipv4: 192.168.50.10
-      startup-config: /configs/r1_setup.sh
-      binds:
-        - ./configs:/configs
-      
-    R02_Berlin:
-      kind: linux
-      mgmt-ipv4: 192.168.50.20
-      startup-config: /configs/r2_setup.sh
-      binds:
-        - ./configs:/configs
-      
-    R03_Frankfurt:
-      kind: linux
-      mgmt-ipv4: 192.168.50.30
-      startup-config: /configs/r3_setup.sh
-      binds:
-        - ./configs:/configs
-      
-    PC1:
-      kind: linux
-      binds:
-        - ./configs:/configs
-      cmd: /bin/sh /configs/pc_startup.sh
-      
-    PC2:
-      kind: linux
-      binds:
-        - ./configs:/configs
-      cmd: /bin/sh /configs/pc_startup.sh
-      
-    PC3:
-      kind: linux
-      binds:
-        - ./configs:/configs
-      cmd: /bin/sh /configs/pc_startup.sh
-
-  links:
-    - endpoints: ["R01_Moscow:eth1", "R02_Berlin:eth1"]
-    - endpoints: ["R01_Moscow:eth2", "R03_Frankfurt:eth1"]
-    - endpoints: ["R02_Berlin:eth2", "R03_Frankfurt:eth2"]
-    - endpoints: ["R01_Moscow:eth3", "PC1:eth1"]
-    - endpoints: ["R02_Berlin:eth3", "PC2:eth1"]
-    - endpoints: ["R03_Frankfurt:eth3", "PC3:eth1"]
+    kinds:
+        vr-mikrotik_ros:
+            image: vrnetlab/mikrotik_routeros:6.47.9
+        linux:
+            image: alpine:latest
+    nodes:
+        R01_Moscow:
+            kind: vr-mikrotik_ros
+            mgmt-ipv4: 192.168.50.10
+            startup-config: ./configs/r1.rsc
+        R02_Berlin:
+            kind: vr-mikrotik_ros
+            mgmt-ipv4: 192.168.50.20
+            startup-config: ./configs/r2.rsc
+        R03_Frankfurt:
+            kind: vr-mikrotik_ros
+            mgmt-ipv4: 192.168.50.30
+            startup-config: ./configs/r3.rsc
+        PC1:
+            kind: linux
+            binds:
+              - ./configs:/configs
+        PC2:
+            kind: linux
+            binds:
+              - ./configs:/configs
+        PC3:
+            kind: linux
+            binds:
+              - ./configs:/configs
+    links:
+        - endpoints: ["R01_Moscow:eth2", "R02_Berlin:eth2"]
+        - endpoints: ["R01_Moscow:eth3", "R03_Frankfurt:eth3"]
+        - endpoints: ["R01_Moscow:eth4", "PC1:eth2"]
+        - endpoints: ["R02_Berlin:eth3", "R03_Frankfurt:eth2"]
+        - endpoints: ["R02_Berlin:eth4", "PC2:eth2"]
+        - endpoints: ["R03_Frankfurt:eth4", "PC3:eth2"]
 
 mgmt:
   network: mgmt-net
