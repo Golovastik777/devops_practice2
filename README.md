@@ -22,21 +22,21 @@ name: rogakopita-games
 
 topology:
     kinds:
-        vr-mikrotik_ros:
+        vr-ros:
             image: vrnetlab/mikrotik_routeros:6.47.9
         linux:
             image: alpine:latest
     nodes:
         R01_Moscow:
-            kind: vr-mikrotik_ros
+            kind: vr-ros
             mgmt-ipv4: 192.168.50.10
             startup-config: ./configs/r1.rsc
         R02_Berlin:
-            kind: vr-mikrotik_ros
+            kind: vr-ros
             mgmt-ipv4: 192.168.50.20
             startup-config: ./configs/r2.rsc
         R03_Frankfurt:
-            kind: vr-mikrotik_ros
+            kind: vr-ros
             mgmt-ipv4: 192.168.50.30
             startup-config: ./configs/r3.rsc
         PC1:
